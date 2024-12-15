@@ -1,1 +1,3 @@
-package biblioteca;
+public class AlunoFactory {
+
+}
