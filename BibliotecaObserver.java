@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class BibliotecaObserver {
     @Override
     public void atualizar() {

@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class MultaPadrao {
     @Override
     public float calcularMulta(Emprestimo emprestimo) {

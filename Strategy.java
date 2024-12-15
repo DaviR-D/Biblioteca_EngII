@@ -1,3 +1,5 @@
+package biblioteca;
+
 public interface Strategy {
     public float calcularMulta(Emprestimo emprestimo) {
         // Implementação padrão

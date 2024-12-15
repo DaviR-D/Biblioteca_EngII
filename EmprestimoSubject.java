@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class EmprestimoSubject {
     private List<Observer> observers = new ArrayList<>();
 

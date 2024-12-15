@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class Debito {
     private float valor;
     private String descricao;

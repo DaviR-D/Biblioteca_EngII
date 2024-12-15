@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class Emprestimo {
     private Date dataEmprestimo;
     private Date dataPrevistaDevolucao;

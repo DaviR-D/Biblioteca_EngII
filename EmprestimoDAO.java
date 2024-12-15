@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class EmprestimoDAO {
     public void save(Emprestimo emprestimo) {
         // Salva o empréstimo

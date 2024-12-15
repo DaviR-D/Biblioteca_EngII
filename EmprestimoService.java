@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class EmprestimoService {
     private EmprestimoDAO emprestimoDAO;
     private AlunoDAO alunoDAO;

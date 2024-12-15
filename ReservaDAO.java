@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class ReservaDAO {
     public void save(Reserva reserva) {
         // Salva a reserva

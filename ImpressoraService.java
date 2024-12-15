@@ -1,3 +1,5 @@
+package biblioteca;
+
 public class ImpressoraService {
     public class ImpressoraService {
         public void imprimirDadosEmprestimo(Emprestimo emprestimo) {
