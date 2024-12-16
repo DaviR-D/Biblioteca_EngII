@@ -1,6 +1,13 @@
 package biblioteca;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "alunos")
 public class Aluno {
+    @Id
     private int matricula;
     private String nome;
     private String cpf;
@@ -47,15 +54,11 @@ public class Aluno {
         this.endereco = endereco;
     }
 
-    // Métodos adicionais
+    // Método para verificar pendências (por exemplo)
     public boolean possuiPendencias() {
-        // Implementação futura
-        return false;
-    }
-
-    public boolean validarCpf() {
-        // Implementação futura
+        // Lógica para verificar pendências
         return false;
     }
 }
+
 

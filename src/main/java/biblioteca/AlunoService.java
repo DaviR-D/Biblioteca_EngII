@@ -1,25 +1,24 @@
 package biblioteca;
+import java.util.List;
+
 
 public class AlunoService {
     private AlunoDAO alunoDAO;
 
-    // Construtor
-    public AlunoService(AlunoDAO alunoDAO) {
-        this.alunoDAO = alunoDAO;
+    public AlunoService() {
+        alunoDAO = new AlunoDAO();
     }
 
-    // Métodos
     public void salvarAluno(Aluno aluno) {
-        // Implementação futura
+        alunoDAO.save(aluno);
     }
 
-    public Aluno buscarAlunoPorCPF(String cpf) {
-        // Implementação futura
-        return null;
+    public Aluno buscarAlunoPorMatricula(int matricula) {
+        return alunoDAO.findById(matricula);
     }
 
-    public boolean verificarPendencias(Aluno aluno) {
-        // Implementação futura
-        return false;
+    public List<Aluno> listarAlunos() {
+        return alunoDAO.findAll();
     }
 }
+

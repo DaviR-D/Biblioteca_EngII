@@ -9,6 +9,7 @@
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/DevolucaoDAO.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/ReservaDAO.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/LivroService.java
+/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/HibernateUtil.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/BibliotecaObserver.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/AlunoService.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/ReservaService.java

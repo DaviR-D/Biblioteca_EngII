@@ -13,6 +13,7 @@ biblioteca/Strategy.class
 biblioteca/MultaPorAtraso.class
 biblioteca/EmprestimoService.class
 biblioteca/ItemDevolucao.class
+biblioteca/HibernateUtil.class
 biblioteca/AlunoDAO.class
 biblioteca/App.class
 biblioteca/Devolucao.class

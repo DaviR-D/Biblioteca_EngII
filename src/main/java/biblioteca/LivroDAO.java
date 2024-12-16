@@ -2,31 +2,84 @@ package biblioteca;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.List;
+
 public class LivroDAO implements GenericDAO<Livro> {
+
     @Override
     public void save(Livro livro) {
-        // Implementação futura
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(livro);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public Livro findById(int id) {
-        // Implementação futura
-        return null;
+        Session session = HibernateUtil.getSession();
+        Livro livro = session.get(Livro.class, id);
+        session.close();
+        return livro;
     }
 
     @Override
     public List<Livro> findAll() {
-        // Implementação futura
-        return null;
+        Session session = HibernateUtil.getSession();
+        List<Livro> livros = session.createQuery("from Livro", Livro.class).list();
+        session.close();
+        return livros;
     }
 
     @Override
     public void update(Livro livro) {
-        // Implementação futura
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(livro);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public void delete(int id) {
-        // Implementação futura
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Livro livro = session.get(Livro.class, id);
+            if (livro != null) {
+                session.delete(livro);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 }
+

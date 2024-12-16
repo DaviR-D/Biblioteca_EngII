@@ -1,25 +1,23 @@
 package biblioteca;
+import java.util.List;
 
 public class LivroService {
     private LivroDAO livroDAO;
 
-    // Construtor
-    public LivroService(LivroDAO livroDAO) {
-        this.livroDAO = livroDAO;
+    public LivroService() {
+        livroDAO = new LivroDAO();
     }
 
-    // Métodos
     public void salvarLivro(Livro livro) {
-        // Implementação futura
+        livroDAO.save(livro);
     }
 
-    public Livro buscarLivroPorISBN(String isbn) {
-        // Implementação futura
-        return null;
+    public Livro buscarLivroPorId(int id) {
+        return livroDAO.findById(id);
     }
 
-    public boolean verificarDisponibilidade(Livro livro) {
-        // Implementação futura
-        return false;
+    public List<Livro> listarLivros() {
+        return livroDAO.findAll();
     }
 }
+
