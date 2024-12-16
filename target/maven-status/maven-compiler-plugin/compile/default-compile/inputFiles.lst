@@ -2,6 +2,7 @@
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/ItemEmprestimo.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/Emprestimo.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/Livro.java
+/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/TituloService.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/Strategy.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/EmprestimoDAO.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/Devolucao.java
@@ -10,9 +11,11 @@
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/ReservaDAO.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/LivroService.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/HibernateUtil.java
+/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/TituloFactory.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/BibliotecaObserver.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/AlunoService.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/ReservaService.java
+/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/Area.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/Reserva.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/EmprestimoFactory.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/LivroFactory.java
@@ -26,6 +29,7 @@
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/App.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/Aluno.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/EmprestimoSubject.java
+/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/TituloDAO.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/MultaPorAtraso.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/LivroDAO.java
 /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/src/main/java/biblioteca/Observer.java

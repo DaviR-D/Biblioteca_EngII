@@ -1,13 +1,16 @@
 biblioteca/DevolucaoDAO.class
 biblioteca/BibliotecaObserver.class
+biblioteca/TituloFactory.class
 biblioteca/Livro.class
 biblioteca/GenericDAO.class
 biblioteca/Debito.class
 biblioteca/Emprestimo.class
 biblioteca/LivroDAO.class
 biblioteca/ItemEmprestimo.class
+biblioteca/TituloDAO.class
 biblioteca/ReservaService.class
 biblioteca/DevolucaoService.class
+biblioteca/TituloService.class
 biblioteca/EmprestimoDAO.class
 biblioteca/Strategy.class
 biblioteca/MultaPorAtraso.class
@@ -30,4 +33,5 @@ biblioteca/Reserva.class
 biblioteca/LivroService.class
 biblioteca/Aluno.class
 biblioteca/LivroFactory.class
+biblioteca/Area.class
 biblioteca/Observer.class
