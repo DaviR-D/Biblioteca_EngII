@@ -1,25 +1,32 @@
 package biblioteca;
 
-public class LivroDAO {
+import java.util.List;
+
+public class LivroDAO implements GenericDAO<Livro> {
+    @Override
     public void save(Livro livro) {
-        // Salva o livro no banco de dados
+        // Implementação futura
     }
-    
-    public Livro find(int id) {
-        // Retorna um livro pelo ID
+
+    @Override
+    public Livro findById(int id) {
+        // Implementação futura
         return null;
     }
-    
+
+    @Override
     public List<Livro> findAll() {
+        // Implementação futura
         return null;
     }
-    
+
+    @Override
     public void update(Livro livro) {
-        // Atualiza as informações do livro
+        // Implementação futura
     }
-    
+
+    @Override
     public void delete(int id) {
-        // Deleta o livro pelo ID
+        // Implementação futura
     }
-    
 }

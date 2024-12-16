@@ -1,24 +1,32 @@
 package biblioteca;
 
-public class EmprestimoDAO {
+import java.util.List;
+
+public class EmprestimoDAO implements GenericDAO<Emprestimo> {
+    @Override
     public void save(Emprestimo emprestimo) {
-        // Salva o empréstimo
+        // Implementação futura
     }
-    
-    public Emprestimo find(int id) {
+
+    @Override
+    public Emprestimo findById(int id) {
+        // Implementação futura
         return null;
     }
-    
+
+    @Override
     public List<Emprestimo> findAll() {
+        // Implementação futura
         return null;
     }
-    
+
+    @Override
     public void update(Emprestimo emprestimo) {
-        // Atualiza o empréstimo
+        // Implementação futura
     }
-    
+
+    @Override
     public void delete(int id) {
-        // Deleta o empréstimo
+        // Implementação futura
     }
-    
 }

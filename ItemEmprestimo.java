@@ -1,34 +1,41 @@
 package biblioteca;
 
+import java.util.Date;
+
 public class ItemEmprestimo {
     private Date dataDevolucao;
-    private float valor;
-    private float multa;
+    private Date dataPrevista;
     private Livro livro;
-    
-    public ItemEmprestimo(Livro livro, Date dataDevolucao, float valor) {
-        this.livro = livro;
+
+    // Construtor
+    public ItemEmprestimo(Date dataDevolucao, Date dataPrevista, Livro livro) {
         this.dataDevolucao = dataDevolucao;
-        this.valor = valor;
-        this.multa = 0;
-    }
-    
-    public void setLivro(Livro livro) {
+        this.dataPrevista = dataPrevista;
         this.livro = livro;
     }
-    
+
+    // Getters e Setters
+    public Date getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public Date getDataPrevista() {
+        return dataPrevista;
+    }
+
+    public void setDataPrevista(Date dataPrevista) {
+        this.dataPrevista = dataPrevista;
+    }
+
     public Livro getLivro() {
         return livro;
     }
-    
-    public float calcularMultaPorLivro() {
-        // Calcular a multa por livro com base na data de devolução
-        return multa;
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
     }
-    
-    public boolean verificarAtraso(Date dataPrevista) {
-        // Verifica se o item está atrasado em relação à data prevista
-        return dataDevolucao.after(dataPrevista);
-    }
-    
 }

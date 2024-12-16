@@ -1,10 +1,9 @@
 package biblioteca;
 
-public class MultaPadrao {
+public class MultaPadrao implements Strategy {
     @Override
     public float calcularMulta(Emprestimo emprestimo) {
-        // Cálculo padrão de multa
+        // Implementação futura
         return 0;
     }
-    
 }

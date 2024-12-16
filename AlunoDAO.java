@@ -1,26 +1,32 @@
 package biblioteca;
 
-public class AlunoDAO {
+import java.util.List;
+
+public class AlunoDAO implements GenericDAO<Aluno> {
+    @Override
     public void save(Aluno aluno) {
-        // Implementação para salvar o aluno no banco de dados
+        // Implementação futura
     }
-    
-    public Aluno find(int id) {
-        // Implementação para encontrar aluno pelo ID
+
+    @Override
+    public Aluno findById(int id) {
+        // Implementação futura
         return null;
     }
-    
+
+    @Override
     public List<Aluno> findAll() {
-        // Implementação para retornar todos os alunos
+        // Implementação futura
         return null;
     }
-    
+
+    @Override
     public void update(Aluno aluno) {
-        // Implementação para atualizar informações do aluno
+        // Implementação futura
     }
-    
+
+    @Override
     public void delete(int id) {
-        // Implementação para deletar aluno pelo ID
+        // Implementação futura
     }
-    
 }

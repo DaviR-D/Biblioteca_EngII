@@ -3,21 +3,23 @@ package biblioteca;
 public class AlunoService {
     private AlunoDAO alunoDAO;
 
+    // Construtor
     public AlunoService(AlunoDAO alunoDAO) {
         this.alunoDAO = alunoDAO;
     }
-    
+
+    // Métodos
     public void salvarAluno(Aluno aluno) {
-        alunoDAO.save(aluno);
+        // Implementação futura
     }
-    
+
     public Aluno buscarAlunoPorCPF(String cpf) {
-        // Implementação de busca por CPF
+        // Implementação futura
         return null;
     }
-    
+
     public boolean verificarPendencias(Aluno aluno) {
-        return aluno.possuiPendencias();
+        // Implementação futura
+        return false;
     }
-    
 }

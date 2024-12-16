@@ -1,28 +1,57 @@
 package biblioteca;
 
+import java.util.Date;
+
 public class ItemDevolucao {
     private Date dataDevolucao;
     private float valor;
+    private int diasAtraso;
     private float multa;
-    
-    public ItemDevolucao(Livro livro, Date dataDevolucao) {
+
+    // Construtor
+    public ItemDevolucao(Date dataDevolucao, float valor, int diasAtraso, float multa) {
         this.dataDevolucao = dataDevolucao;
-        this.valor = livro.getValor();
-        this.multa = 0;
+        this.valor = valor;
+        this.diasAtraso = diasAtraso;
+        this.multa = multa;
     }
-    
-    public void setLivro(Livro livro) {
-        // Atribui um livro
+
+    // Getters e Setters
+    public Date getDataDevolucao() {
+        return dataDevolucao;
     }
-    
-    public Livro getLivro() {
-        // Retorna o livro
-        return null;
+
+    public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
-    
-    public float calcularMultaPorLivro() {
-        // Calcula a multa
+
+    public float getValor() {
+        return valor;
+    }
+
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+
+    public int getDiasAtraso() {
+        return diasAtraso;
+    }
+
+    public void setDiasAtraso(int diasAtraso) {
+        this.diasAtraso = diasAtraso;
+    }
+
+    public float getMulta() {
         return multa;
     }
-    
+
+    public void setMulta(float multa) {
+        this.multa = multa;
+    }
+
+    // Métodos adicionais
+    public float calcularMultaPorLivro() {
+        // Implementação futura
+        return 0;
+    }
 }

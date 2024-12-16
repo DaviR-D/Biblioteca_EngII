@@ -1,9 +1,8 @@
 package biblioteca;
 
-public class BibliotecaObserver {
+public class BibliotecaObserver implements Observer {
     @Override
     public void atualizar() {
-        // Implementação de notificação específica da biblioteca
+        // Implementação futura
     }
-    
 }

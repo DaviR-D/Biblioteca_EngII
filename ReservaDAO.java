@@ -1,24 +1,32 @@
 package biblioteca;
 
-public class ReservaDAO {
+import java.util.List;
+
+public class ReservaDAO implements GenericDAO<Reserva> {
+    @Override
     public void save(Reserva reserva) {
-        // Salva a reserva
+        // Implementação futura
     }
-    
-    public Reserva find(int id) {
+
+    @Override
+    public Reserva findById(int id) {
+        // Implementação futura
         return null;
     }
-    
+
+    @Override
     public List<Reserva> findAll() {
+        // Implementação futura
         return null;
     }
-    
+
+    @Override
     public void update(Reserva reserva) {
-        // Atualiza a reserva
+        // Implementação futura
     }
-    
+
+    @Override
     public void delete(int id) {
-        // Deleta a reserva
+        // Implementação futura
     }
-    
 }
