@@ -1,56 +1,53 @@
 package biblioteca;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "emprestimos")
 public class Emprestimo {
-    private Date dataEmprestimo;
-    private Date dataDevolucao;
-    private float multa;
-    private boolean atraso;
 
-    // Construtor
-    public Emprestimo(Date dataEmprestimo, Date dataDevolucao, float multa, boolean atraso) {
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
-        this.multa = multa;
-        this.atraso = atraso;
+    @Id
+    private int id;
+
+    @ManyToOne
+    private Aluno aluno;
+
+    @ManyToOne
+    private Livro livro;
+
+    // Construtores
+    public Emprestimo() {}
+
+    public Emprestimo(Aluno aluno, Livro livro) {
+        this.aluno = aluno;
+        this.livro = livro;
     }
 
     // Getters e Setters
-    public Date getDataEmprestimo() {
-        return dataEmprestimo;
+    public int getId() {
+        return id;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo) {
-        this.dataEmprestimo = dataEmprestimo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Date getDataDevolucao() {
-        return dataDevolucao;
+    public Aluno getAluno() {
+        return aluno;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
-    public float getMulta() {
-        return multa;
+    public Livro getLivro() {
+        return livro;
     }
 
-    public void setMulta(float multa) {
-        this.multa = multa;
-    }
-
-    public boolean isAtraso() {
-        return atraso;
-    }
-
-    public void setAtraso(boolean atraso) {
-        this.atraso = atraso;
-    }
-
-    // Métodos adicionais
-    public void calcularDataDevolucao(Titulo titulo) {
-        // Implementação futura
+    public void setLivro(Livro livro) {
+        this.livro = livro;
     }
 }

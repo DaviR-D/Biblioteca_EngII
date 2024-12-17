@@ -77,107 +77,134 @@ public class App extends Application {
             }
         });
 
- // ===========================
-// Campos para cadastrar livro
-// ===========================
-Label tituloLivroLabel = new Label("Título do Livro:");
-TextField tituloLivroField = new TextField();
-Label isbnLivroLabel = new Label("ISBN:");
-TextField isbnLivroField = new TextField();
-Label autorLivroLabel = new Label("Autor:");
-TextField autorLivroField = new TextField();
-Button cadastrarLivroBtn = new Button("Cadastrar Livro");
+        // ===========================
+        // Campos para cadastrar livro
+        // ===========================
+        Label tituloLivroLabel = new Label("Título do Livro:");
+        TextField tituloLivroField = new TextField();
+        Label isbnLivroLabel = new Label("ISBN:");
+        TextField isbnLivroField = new TextField();
+        Label autorLivroLabel = new Label("Autor:");
+        TextField autorLivroField = new TextField();
+        Button cadastrarLivroBtn = new Button("Cadastrar Livro");
 
-grid.add(tituloLivroLabel, 0, 4);
-grid.add(tituloLivroField, 1, 4);
-grid.add(isbnLivroLabel, 0, 5);
-grid.add(isbnLivroField, 1, 5);
-grid.add(autorLivroLabel, 0, 6);
-grid.add(autorLivroField, 1, 6);
-grid.add(cadastrarLivroBtn, 1, 7);
+        grid.add(tituloLivroLabel, 0, 4);
+        grid.add(tituloLivroField, 1, 4);
+        grid.add(isbnLivroLabel, 0, 5);
+        grid.add(isbnLivroField, 1, 5);
+        grid.add(autorLivroLabel, 0, 6);
+        grid.add(autorLivroField, 1, 6);
+        grid.add(cadastrarLivroBtn, 1, 7);
 
-// Ação do botão de cadastrar livro
-cadastrarLivroBtn.setOnAction(e -> {
-    String titulo = tituloLivroField.getText();
-    String isbn = isbnLivroField.getText();
-    String autor = autorLivroField.getText();
+        // Ação do botão de cadastrar livro
+        cadastrarLivroBtn.setOnAction(e -> {
+            String titulo = tituloLivroField.getText();
+            String isbn = isbnLivroField.getText();
+            String autor = autorLivroField.getText();
 
-    if (titulo.isEmpty() || isbn.isEmpty() || autor.isEmpty()) {
-        showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos!");
-        return;
-    }
+            if (titulo.isEmpty() || isbn.isEmpty() || autor.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos!");
+                return;
+            }
 
-    try {
-        LivroService livroService = new LivroService();
-        Livro livro = new Livro();
-        livro.setTitulo(titulo);
-        livro.setIsbn(isbn);
-        livro.setAutor(autor);
-        livro.setDisponivel(true);
+            try {
+                LivroService livroService = new LivroService();
+                Livro livro = new Livro();
+                livro.setTitulo(titulo);
+                livro.setIsbn(isbn);
+                livro.setAutor(autor);
+                livro.setDisponivel(true);
 
-        livroService.salvarLivro(livro);
-        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Livro cadastrado com sucesso!");
+                livroService.salvarLivro(livro);
+                showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Livro cadastrado com sucesso!");
 
-        // Limpar campos após cadastro
-        tituloLivroField.clear();
-        isbnLivroField.clear();
-        autorLivroField.clear();
-    } catch (Exception ex) {
-        showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao cadastrar livro: " + ex.getMessage());
-    }
-});
+                // Limpar campos após cadastro
+                tituloLivroField.clear();
+                isbnLivroField.clear();
+                autorLivroField.clear();
+            } catch (Exception ex) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao cadastrar livro: " + ex.getMessage());
+            }
+        });
 
+        // ===========================
+        // Campos para emprestar livro
+        // ===========================
+        Label isbnEmprestimoLabel = new Label("ISBN do Livro:");
+        TextField isbnEmprestimoField = new TextField();
+        Label cpfEmprestimoLabel = new Label("CPF do Aluno:");
+        TextField cpfEmprestimoField = new TextField();
+        Button emprestarLivroBtn = new Button("Emprestar Livro");
+
+        grid.add(isbnEmprestimoLabel, 0, 8);
+        grid.add(isbnEmprestimoField, 1, 8);
+        grid.add(cpfEmprestimoLabel, 0, 9);
+        grid.add(cpfEmprestimoField, 1, 9);
+        grid.add(emprestarLivroBtn, 1, 10);
+
+        // Ação do botão de emprestar livro
+        emprestarLivroBtn.setOnAction(e -> {
+            String isbn = isbnEmprestimoField.getText();
+            String cpf = cpfEmprestimoField.getText();
+
+            if (isbn.isEmpty() || cpf.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos!");
+                return;
+            }
+
+            try {
+                // Verificar se o livro está disponível
+                Session session = HibernateUtil.getSession();
+                Query<Livro> queryLivro = session.createQuery("FROM Livro WHERE isbn = :isbn", Livro.class);
+                queryLivro.setParameter("isbn", isbn);
+                Livro livro = queryLivro.uniqueResult();
+
+                if (livro == null || !livro.isDisponivel()) {
+                    showAlert(Alert.AlertType.ERROR, "Erro", "Livro não disponível para empréstimo!");
+                    return;
+                }
+
+                // Verificar se o aluno existe
+                Query<Aluno> queryAluno = session.createQuery("FROM Aluno WHERE cpf = :cpf", Aluno.class);
+                queryAluno.setParameter("cpf", cpf);
+                Aluno aluno = queryAluno.uniqueResult();
+
+                if (aluno == null) {
+                    showAlert(Alert.AlertType.ERROR, "Erro", "Aluno não encontrado!");
+                    return;
+                }
+
+                // Criar o empréstimo
+                Emprestimo emprestimo = new Emprestimo();
+                emprestimo.setLivro(livro);
+                emprestimo.setAluno(aluno);
+                emprestimo.setDataEmprestimo(new java.util.Date());
+
+                EmprestimoService emprestimoService = new EmprestimoService();
+                emprestimoService.salvarEmprestimo(emprestimo);
+
+                // Atualizar a disponibilidade do livro
+                livro.setDisponivel(false);
+                session.update(livro);
+
+                showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Empréstimo realizado com sucesso!");
+
+                // Limpar campos após o empréstimo
+                isbnEmprestimoField.clear();
+                cpfEmprestimoField.clear();
+
+            } catch (Exception ex) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao realizar empréstimo: " + ex.getMessage());
+            }
+        });
 
         // ===========================
         // Configuração da cena
         // ===========================
-        Scene scene = new Scene(grid, 500, 350);
+        Scene scene = new Scene(grid, 500, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
-        //HibernateUtil.limparBanco();
-        imprimirAlunos();
     }
-
-    private void imprimirAlunos() {
-        // Iniciar uma transação
-        Session session = HibernateUtil.getSession(); // Usando o método correto para obter a sessão
-        Transaction transaction = null;
-        
-        try {
-            transaction = session.beginTransaction();
-            
-            // Buscar todos os alunos
-            Query<Aluno> queryAlunos = session.createQuery("FROM Aluno", Aluno.class);
-            List<Aluno> alunos = queryAlunos.getResultList();
-            
-            // Imprimir no console os alunos
-            for (Aluno aluno : alunos) {
-                System.out.println("Matrícula: " + aluno.getMatricula() + ", Nome: " + aluno.getNome() + ", CPF: " + aluno.getCpf());
-            }
-    
-            // Buscar todos os livros
-            Query<Livro> queryLivros = session.createQuery("FROM Livro", Livro.class);
-            List<Livro> livros = queryLivros.getResultList();
-            
-            // Imprimir no console os livros
-            for (Livro livro : livros) {
-                System.out.println("Título: " + livro.getTitulo() + ", ISBN: " + livro.getIsbn() + ", Autor: " + livro.getAutor() + ", Disponível: " + livro.isDisponivel());
-            }
-            
-            // Confirmar a transação
-            transaction.commit();
-            
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback(); // Reverter a transação em caso de erro
-            }
-            System.out.println("Erro ao recuperar dados: " + ex.getMessage());
-        } finally {
-            session.close(); // Fechar a sessão
-        }
-    }
-    
-    
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
@@ -190,6 +217,3 @@ cadastrarLivroBtn.setOnAction(e -> {
         launch(args);
     }
 }
-
-
-
