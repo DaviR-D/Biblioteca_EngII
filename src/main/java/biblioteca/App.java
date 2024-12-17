@@ -113,6 +113,7 @@ cadastrarLivroBtn.setOnAction(e -> {
         livro.setTitulo(titulo);
         livro.setIsbn(isbn);
         livro.setAutor(autor);
+        livro.setDisponivel(true);
 
         livroService.salvarLivro(livro);
         showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Livro cadastrado com sucesso!");
@@ -133,7 +134,7 @@ cadastrarLivroBtn.setOnAction(e -> {
         Scene scene = new Scene(grid, 500, 350);
         primaryStage.setScene(scene);
         primaryStage.show();
-
+        //HibernateUtil.limparBanco();
         imprimirAlunos();
     }
 
@@ -160,7 +161,7 @@ cadastrarLivroBtn.setOnAction(e -> {
             
             // Imprimir no console os livros
             for (Livro livro : livros) {
-                System.out.println("Título: " + livro.getTitulo() + ", ISBN: " + livro.getIsbn() + ", Autor: " + livro.getAutor());
+                System.out.println("Título: " + livro.getTitulo() + ", ISBN: " + livro.getIsbn() + ", Autor: " + livro.getAutor() + ", Disponível: " + livro.isDisponivel());
             }
             
             // Confirmar a transação

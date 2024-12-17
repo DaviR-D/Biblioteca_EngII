@@ -3,6 +3,7 @@ package biblioteca;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.Transaction; 
 
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
@@ -29,6 +30,27 @@ public class HibernateUtil {
     // Método para fechar a SessionFactory
     public static void close() {
         sessionFactory.close();
+    }
+
+    public static void limparBanco() {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        
+        try {
+            transaction = session.beginTransaction();
+            
+            // Comando para apagar todas as tabelas
+            session.createNativeQuery("DROP ALL OBJECTS").executeUpdate();
+            
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 }
 
