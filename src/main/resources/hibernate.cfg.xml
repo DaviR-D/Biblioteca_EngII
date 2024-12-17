@@ -34,3 +34,4 @@
         <property name="hibernate.format_sql">true</property>
     </session-factory>
 </hibernate-configuration>
+

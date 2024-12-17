@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="biblioteca.AppTest" time="0.058" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="biblioteca.AppTest" time="0.054" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk-21.0.5.0.11-1.fc41.x86_64/lib"/>
-    <property name="sun.java.command" value="/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/target/surefire/surefirebooter-20241216174043531_3.jar /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/target/surefire 2024-12-16T17-40-43_365-jvmRun1 surefire-20241216174043531_1tmp surefire_0-20241216174043531_2tmp"/>
+    <property name="sun.java.command" value="/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/target/surefire/surefirebooter-20241217091355032_3.jar /home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/target/surefire 2024-12-17T09-13-54_876-jvmRun1 surefire-20241217091355032_1tmp surefire_0-20241217091355032_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/target/test-classes:/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/target/classes:/home/davi/.m2/repository/org/openjfx/javafx-controls/20/javafx-controls-20.jar:/home/davi/.m2/repository/org/openjfx/javafx-controls/20/javafx-controls-20-linux.jar:/home/davi/.m2/repository/org/openjfx/javafx-graphics/20/javafx-graphics-20.jar:/home/davi/.m2/repository/org/openjfx/javafx-graphics/20/javafx-graphics-20-linux.jar:/home/davi/.m2/repository/org/openjfx/javafx-base/20/javafx-base-20.jar:/home/davi/.m2/repository/org/openjfx/javafx-base/20/javafx-base-20-linux.jar:/home/davi/.m2/repository/org/openjfx/javafx-fxml/20/javafx-fxml-20.jar:/home/davi/.m2/repository/org/openjfx/javafx-fxml/20/javafx-fxml-20-linux.jar:/home/davi/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/davi/.m2/repository/org/hibernate/hibernate-core/5.6.10.Final/hibernate-core-5.6.10.Final.jar:/home/davi/.m2/repository/org/jboss/logging/jboss-logging/3.4.3.Final/jboss-logging-3.4.3.Final.jar:/home/davi/.m2/repository/net/bytebuddy/byte-buddy/1.12.9/byte-buddy-1.12.9.jar:/home/davi/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/home/davi/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.1.1.Final/jboss-transaction-api_1.2_spec-1.1.1.Final.jar:/home/davi/.m2/repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/home/davi/.m2/repository/com/fasterxml/classmate/1.5.1/classmate-1.5.1.jar:/home/davi/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar:/home/davi/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.1.2.Final/hibernate-commons-annotations-5.1.2.Final.jar:/home/davi/.m2/repository/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar:/home/davi/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.1/jaxb-runtime-2.3.1.jar:/home/davi/.m2/repository/org/glassfish/jaxb/txw2/2.3.1/txw2-2.3.1.jar:/home/davi/.m2/repository/com/sun/istack/istack-commons-runtime/3.0.7/istack-commons-runtime-3.0.7.jar:/home/davi/.m2/repository/org/jvnet/staxex/stax-ex/1.8/stax-ex-1.8.jar:/home/davi/.m2/repository/com/sun/xml/fastinfoset/FastInfoset/1.2.15/FastInfoset-1.2.15.jar:/home/davi/.m2/repository/com/h2database/h2/2.1.214/h2-2.1.214.jar:/home/davi/.m2/repository/javax/persistence/javax.persistence-api/2.2/javax.persistence-api-2.2.jar:/home/davi/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar:/home/davi/.m2/repository/org/slf4j/slf4j-simple/1.7.32/slf4j-simple-1.7.32.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/target/surefire/surefirebooter-20241216174043531_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/davi/Documents/Faculdade/EngII/Biblioteca_EngII/target/surefire/surefirebooter-20241217091355032_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.5+11"/>
     <property name="user.name" value="davi"/>
@@ -54,5 +54,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testApp" classname="biblioteca.AppTest" time="0.009"/>
+  <testcase name="testApp" classname="biblioteca.AppTest" time="0.007"/>
 </testsuite>

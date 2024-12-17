@@ -8,25 +8,27 @@ import javax.persistence.Table;
 @Table(name = "alunos")
 public class Aluno {
     @Id
-    private int matricula;
+    private Integer matricula;
     private String nome;
     private String cpf;
     private String endereco;
 
     // Construtor
-    public Aluno(int matricula, String nome, String cpf, String endereco) {
+    public Aluno(Integer matricula, String nome, String cpf, String endereco) {
         this.matricula = matricula;
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
     }
 
+    public Aluno(){}
+
     // Getters e Setters
-    public int getMatricula() {
+    public Integer getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(Integer matricula) {
         this.matricula = matricula;
     }
 

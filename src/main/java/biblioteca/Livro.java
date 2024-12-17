@@ -26,6 +26,7 @@ public class Livro {
         this.exemplarBiblioteca = true;
         this.reservado = false;
     }
+    public Livro() {}
 
     // Getters e Setters
     public int getId() {

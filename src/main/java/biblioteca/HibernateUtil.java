@@ -21,11 +21,14 @@ public class HibernateUtil {
         }
     }
 
+    // Método para obter uma sessão nova e independente
     public static Session getSession() {
-        return sessionFactory.getCurrentSession();
+        return sessionFactory.openSession();
     }
 
+    // Método para fechar a SessionFactory
     public static void close() {
         sessionFactory.close();
     }
 }
+
