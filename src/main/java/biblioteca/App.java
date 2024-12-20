@@ -5,11 +5,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query; // Para a classe Query do Hibernate
-import java.util.List; // Para usar List
+import org.hibernate.query.Query;
+import java.util.List;
 
 public class App extends Application {
 
@@ -17,15 +18,26 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Sistema de Biblioteca");
 
-        // GridPane para organizar os formulários
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10));
-        grid.setHgap(10);
-        grid.setVgap(10);
+        // Tela inicial
+        VBox mainMenu = new VBox(10);
+        mainMenu.setPadding(new Insets(10));
+        Button btnCadastrarAluno = new Button("Cadastrar Aluno");
+        Button btnCadastrarLivro = new Button("Cadastrar Livro");
 
-        // ===========================
-        // Campos para cadastrar aluno
-        // ===========================
+        mainMenu.getChildren().addAll(btnCadastrarAluno, btnCadastrarLivro);
+
+        Scene mainScene = new Scene(mainMenu, 300, 200);
+        primaryStage.setScene(mainScene);
+        primaryStage.show();
+
+        // Configuração da janela de cadastro de aluno
+        Stage alunoStage = new Stage();
+        alunoStage.setTitle("Cadastrar Aluno");
+        GridPane alunoGrid = new GridPane();
+        alunoGrid.setPadding(new Insets(10));
+        alunoGrid.setHgap(10);
+        alunoGrid.setVgap(10);
+
         Label matriculaLabel = new Label("Matrícula:");
         TextField matriculaField = new TextField();
         Label nomeAlunoLabel = new Label("Nome do Aluno:");
@@ -34,15 +46,14 @@ public class App extends Application {
         TextField cpfAlunoField = new TextField();
         Button cadastrarAlunoBtn = new Button("Cadastrar Aluno");
 
-        grid.add(matriculaLabel, 0, 0);
-        grid.add(matriculaField, 1, 0);
-        grid.add(nomeAlunoLabel, 0, 1);
-        grid.add(nomeAlunoField, 1, 1);
-        grid.add(cpfAlunoLabel, 0, 2);
-        grid.add(cpfAlunoField, 1, 2);
-        grid.add(cadastrarAlunoBtn, 1, 3);
+        alunoGrid.add(matriculaLabel, 0, 0);
+        alunoGrid.add(matriculaField, 1, 0);
+        alunoGrid.add(nomeAlunoLabel, 0, 1);
+        alunoGrid.add(nomeAlunoField, 1, 1);
+        alunoGrid.add(cpfAlunoLabel, 0, 2);
+        alunoGrid.add(cpfAlunoField, 1, 2);
+        alunoGrid.add(cadastrarAlunoBtn, 1, 3);
 
-        // Ação do botão de cadastrar aluno
         cadastrarAlunoBtn.setOnAction(e -> {
             String matriculaTexto = matriculaField.getText();
             String nome = nomeAlunoField.getText();
@@ -65,8 +76,7 @@ public class App extends Application {
 
                 alunoService.salvarAluno(aluno);
                 showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Aluno cadastrado com sucesso!");
-                
-                // Limpar campos após cadastro
+
                 matriculaField.clear();
                 nomeAlunoField.clear();
                 cpfAlunoField.clear();
@@ -77,64 +87,71 @@ public class App extends Application {
             }
         });
 
- // ===========================
-// Campos para cadastrar livro
-// ===========================
-Label tituloLivroLabel = new Label("Título do Livro:");
-TextField tituloLivroField = new TextField();
-Label isbnLivroLabel = new Label("ISBN:");
-TextField isbnLivroField = new TextField();
-Label autorLivroLabel = new Label("Autor:");
-TextField autorLivroField = new TextField();
-Button cadastrarLivroBtn = new Button("Cadastrar Livro");
+        Scene alunoScene = new Scene(alunoGrid, 400, 200);
+        alunoStage.setScene(alunoScene);
 
-grid.add(tituloLivroLabel, 0, 4);
-grid.add(tituloLivroField, 1, 4);
-grid.add(isbnLivroLabel, 0, 5);
-grid.add(isbnLivroField, 1, 5);
-grid.add(autorLivroLabel, 0, 6);
-grid.add(autorLivroField, 1, 6);
-grid.add(cadastrarLivroBtn, 1, 7);
+        // Configuração da janela de cadastro de livro
+        Stage livroStage = new Stage();
+        livroStage.setTitle("Cadastrar Livro");
+        GridPane livroGrid = new GridPane();
+        livroGrid.setPadding(new Insets(10));
+        livroGrid.setHgap(10);
+        livroGrid.setVgap(10);
 
-// Ação do botão de cadastrar livro
-cadastrarLivroBtn.setOnAction(e -> {
-    String titulo = tituloLivroField.getText();
-    String isbn = isbnLivroField.getText();
-    String autor = autorLivroField.getText();
+        Label tituloLivroLabel = new Label("Título do Livro:");
+        TextField tituloLivroField = new TextField();
+        Label isbnLivroLabel = new Label("ISBN:");
+        TextField isbnLivroField = new TextField();
+        Label autorLivroLabel = new Label("Autor:");
+        TextField autorLivroField = new TextField();
+        Button cadastrarLivroBtn = new Button("Cadastrar Livro");
 
-    if (titulo.isEmpty() || isbn.isEmpty() || autor.isEmpty()) {
-        showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos!");
-        return;
-    }
+        livroGrid.add(tituloLivroLabel, 0, 0);
+        livroGrid.add(tituloLivroField, 1, 0);
+        livroGrid.add(isbnLivroLabel, 0, 1);
+        livroGrid.add(isbnLivroField, 1, 1);
+        livroGrid.add(autorLivroLabel, 0, 2);
+        livroGrid.add(autorLivroField, 1, 2);
+        livroGrid.add(cadastrarLivroBtn, 1, 3);
 
-    try {
-        LivroService livroService = new LivroService();
-        Livro livro = new Livro();
-        livro.setTitulo(titulo);
-        livro.setIsbn(isbn);
-        livro.setAutor(autor);
-        livro.setDisponivel(true);
+        cadastrarLivroBtn.setOnAction(e -> {
+            String titulo = tituloLivroField.getText();
+            String isbn = isbnLivroField.getText();
+            String autor = autorLivroField.getText();
 
-        livroService.salvarLivro(livro);
-        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Livro cadastrado com sucesso!");
+            if (titulo.isEmpty() || isbn.isEmpty() || autor.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos!");
+                return;
+            }
 
-        // Limpar campos após cadastro
-        tituloLivroField.clear();
-        isbnLivroField.clear();
-        autorLivroField.clear();
-    } catch (Exception ex) {
-        showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao cadastrar livro: " + ex.getMessage());
-    }
-});
+            try {
+                LivroService livroService = new LivroService();
+                Livro livro = new Livro();
+                livro.setTitulo(titulo);
+                livro.setIsbn(isbn);
+                livro.setAutor(autor);
+                livro.setDisponivel(true);
 
+                livroService.salvarLivro(livro);
+                showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Livro cadastrado com sucesso!");
 
-        // ===========================
-        // Configuração da cena
-        // ===========================
-        Scene scene = new Scene(grid, 500, 350);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+                tituloLivroField.clear();
+                isbnLivroField.clear();
+                autorLivroField.clear();
+            } catch (Exception ex) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao cadastrar livro: " + ex.getMessage());
+            }
+        });
+
+        Scene livroScene = new Scene(livroGrid, 400, 200);
+        livroStage.setScene(livroScene);
+
+        // Ações dos botões na tela inicial
+        btnCadastrarAluno.setOnAction(e -> alunoStage.show());
+        btnCadastrarLivro.setOnAction(e -> livroStage.show());
+
         //HibernateUtil.limparBanco();
+        // Imprimir dados de alunos e livros
         imprimirAlunos();
     }
 
@@ -142,31 +159,31 @@ cadastrarLivroBtn.setOnAction(e -> {
         // Iniciar uma transação
         Session session = HibernateUtil.getSession(); // Usando o método correto para obter a sessão
         Transaction transaction = null;
-        
+
         try {
             transaction = session.beginTransaction();
-            
+
             // Buscar todos os alunos
             Query<Aluno> queryAlunos = session.createQuery("FROM Aluno", Aluno.class);
             List<Aluno> alunos = queryAlunos.getResultList();
-            
+
             // Imprimir no console os alunos
             for (Aluno aluno : alunos) {
                 System.out.println("Matrícula: " + aluno.getMatricula() + ", Nome: " + aluno.getNome() + ", CPF: " + aluno.getCpf());
             }
-    
+
             // Buscar todos os livros
             Query<Livro> queryLivros = session.createQuery("FROM Livro", Livro.class);
             List<Livro> livros = queryLivros.getResultList();
-            
+
             // Imprimir no console os livros
             for (Livro livro : livros) {
                 System.out.println("Título: " + livro.getTitulo() + ", ISBN: " + livro.getIsbn() + ", Autor: " + livro.getAutor() + ", Disponível: " + livro.isDisponivel());
             }
-            
+
             // Confirmar a transação
             transaction.commit();
-            
+
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback(); // Reverter a transação em caso de erro
@@ -176,8 +193,6 @@ cadastrarLivroBtn.setOnAction(e -> {
             session.close(); // Fechar a sessão
         }
     }
-    
-    
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
@@ -190,6 +205,7 @@ cadastrarLivroBtn.setOnAction(e -> {
         launch(args);
     }
 }
+
 
 
 
