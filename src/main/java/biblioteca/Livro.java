@@ -8,10 +8,10 @@ import javax.persistence.Table;
 @Table(name = "livros")
 public class Livro {
     @Id
+    private String isbn;
     private int id;
     private String titulo;
     private String autor;
-    private String isbn;
     private boolean disponivel;
     private boolean exemplarBiblioteca;
     private boolean reservado;
