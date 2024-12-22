@@ -81,5 +81,16 @@ public class AlunoDAO implements GenericDAO<Aluno> {
             session.close();
         }
     }
+
+    public boolean possuiDebitos(Aluno aluno) {
+        // Lógica para verificar débitos
+        return false;
+    }
+    
+    public boolean possuiReservasPendentes(Aluno aluno) {
+        // Lógica para verificar reservas
+        return false;
+    }
+    
 }
 

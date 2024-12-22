@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import org.hibernate.query.Query;
 import java.util.List;
 
 public class LivroDAO implements GenericDAO<Livro> {
@@ -34,6 +34,22 @@ public class LivroDAO implements GenericDAO<Livro> {
         session.close();
         return livro;
     }
+
+    public Livro findByISBN(String isbn) {
+        Session session = HibernateUtil.getSession();
+        Livro livro = null;
+        try {
+            Query<Livro> query = session.createQuery("FROM Livro WHERE isbn = :isbn", Livro.class);
+            query.setParameter("isbn", isbn);
+            livro = query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return livro;
+    }
+    
 
     @Override
     public List<Livro> findAll() {

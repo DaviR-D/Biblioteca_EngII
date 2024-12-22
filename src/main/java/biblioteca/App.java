@@ -150,6 +150,86 @@ public class App extends Application {
         btnCadastrarAluno.setOnAction(e -> alunoStage.show());
         btnCadastrarLivro.setOnAction(e -> livroStage.show());
 
+        // Configuração da janela de realização de empréstimo
+Stage emprestimoStage = new Stage();
+emprestimoStage.setTitle("Realizar Empréstimo");
+
+GridPane emprestimoGrid = new GridPane();
+emprestimoGrid.setPadding(new Insets(10));
+emprestimoGrid.setHgap(10);
+emprestimoGrid.setVgap(10);
+
+Label alunoLabel = new Label("Matrícula do Aluno:");
+TextField alunoField = new TextField();
+Label livrosLabel = new Label("ISBNs dos Livros (separados por vírgula):");
+TextField livrosField = new TextField();
+Button realizarEmprestimoBtn = new Button("Realizar Empréstimo");
+
+emprestimoGrid.add(alunoLabel, 0, 0);
+emprestimoGrid.add(alunoField, 1, 0);
+emprestimoGrid.add(livrosLabel, 0, 1);
+emprestimoGrid.add(livrosField, 1, 1);
+emprestimoGrid.add(realizarEmprestimoBtn, 1, 2);
+
+realizarEmprestimoBtn.setOnAction(e -> {
+    String matriculaTexto = alunoField.getText();
+    String livrosTexto = livrosField.getText();
+
+    if (matriculaTexto.isEmpty() || livrosTexto.isEmpty()) {
+        showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos!");
+        return;
+    }
+
+    try {
+        int matricula = Integer.parseInt(matriculaTexto);
+        String[] livrosIsbns = livrosTexto.split(",");
+        EmprestimoService emprestimoService = new EmprestimoService(new EmprestimoDAO(), new AlunoDAO(), new LivroDAO(), new ReservaDAO(), new DevolucaoDAO(), new ImpressoraService());
+
+        AlunoDAO alunoDAO = new AlunoDAO();
+        LivroDAO livroDAO = new LivroDAO();
+        Aluno aluno = alunoDAO.findById(matricula);
+        
+        if (aluno == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Aluno não encontrado!");
+            return;
+        }
+
+        List<Livro> livros = new java.util.ArrayList<>();
+        for (String isbn : livrosIsbns) {
+            Livro livro = livroDAO.findByISBN(isbn.trim()); // Alterado para buscar pelo ISBN
+            if (livro != null && livro.isDisponivel()) {
+                livros.add(livro);
+            } else {
+                showAlert(Alert.AlertType.WARNING, "Aviso", "Livro ISBN " + isbn + " não disponível ou não encontrado.");
+            }
+        }
+
+        if (livros.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Nenhum livro válido selecionado para empréstimo.");
+            return;
+        }
+
+        emprestimoService.realizarEmprestimo(aluno, livros);
+        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Empréstimo realizado com sucesso!");
+
+        alunoField.clear();
+        livrosField.clear();
+    } catch (NumberFormatException ex) {
+        showAlert(Alert.AlertType.ERROR, "Erro", "Matrícula e ISBNs dos livros devem ser números inteiros!");
+    } catch (Exception ex) {
+        showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao realizar empréstimo: " + ex.getMessage());
+    }
+});
+
+Scene emprestimoScene = new Scene(emprestimoGrid, 400, 200);
+emprestimoStage.setScene(emprestimoScene);
+
+// Adicionar botão de realização de empréstimo no menu principal
+Button btnRealizarEmprestimo = new Button("Realizar Empréstimo");
+btnRealizarEmprestimo.setOnAction(e -> emprestimoStage.show());
+mainMenu.getChildren().add(btnRealizarEmprestimo);
+
+
         //HibernateUtil.limparBanco();
         // Imprimir dados de alunos e livros
         imprimirAlunos();

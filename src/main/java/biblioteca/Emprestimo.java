@@ -1,8 +1,10 @@
 package biblioteca;
-
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Emprestimo {
+    private EmprestimoFactory emprestimoFactory;
     private Date dataEmprestimo;
     private Date dataDevolucao;
     private float multa;
@@ -10,6 +12,7 @@ public class Emprestimo {
 
     // Construtor
     public Emprestimo(Date dataEmprestimo, Date dataDevolucao, float multa, boolean atraso) {
+        this.emprestimoFactory = new EmprestimoFactory();
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.multa = multa;
@@ -53,4 +56,15 @@ public class Emprestimo {
     public void calcularDataDevolucao(Titulo titulo) {
         // Implementação futura
     }
+
+    private List<ItemEmprestimo> itensEmprestados = new ArrayList<>();
+
+    public void adicionarItem(ItemEmprestimo item) {
+    itensEmprestados.add(item);
+    }
+
+    public List<ItemEmprestimo> getItensEmprestados() {
+        return itensEmprestados;
+    }
+
 }
