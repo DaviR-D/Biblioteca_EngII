@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import java.util.List;
+import java.util.ArrayList;
 
 public class App extends Application {
 
@@ -183,6 +184,11 @@ realizarEmprestimoBtn.setOnAction(e -> {
     try {
         int matricula = Integer.parseInt(matriculaTexto);
         String[] livrosIsbns = livrosTexto.split(",");
+        List<String> isbnList = new ArrayList<>();
+        for (String isbn : livrosIsbns) {
+        isbnList.add(isbn.trim());
+        }
+
         EmprestimoService emprestimoService = new EmprestimoService(new EmprestimoDAO(), new AlunoDAO(), new LivroDAO(), new ReservaDAO(), new DevolucaoDAO(), new ImpressoraService());
 
         AlunoDAO alunoDAO = new AlunoDAO();
@@ -209,7 +215,8 @@ realizarEmprestimoBtn.setOnAction(e -> {
             return;
         }
 
-        emprestimoService.realizarEmprestimo(aluno, livros);
+        emprestimoService.realizarEmprestimo(aluno, isbnList);
+
         showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Empréstimo realizado com sucesso!");
 
         alunoField.clear();
@@ -232,38 +239,58 @@ mainMenu.getChildren().add(btnRealizarEmprestimo);
 
         //HibernateUtil.limparBanco();
         // Imprimir dados de alunos e livros
-        imprimirAlunos();
+        imprimirDados();
     }
 
-    private void imprimirAlunos() {
+    private void imprimirDados() {
         // Iniciar uma transação
         Session session = HibernateUtil.getSession(); // Usando o método correto para obter a sessão
         Transaction transaction = null;
-
+    
         try {
             transaction = session.beginTransaction();
-
+    
             // Buscar todos os alunos
             Query<Aluno> queryAlunos = session.createQuery("FROM Aluno", Aluno.class);
             List<Aluno> alunos = queryAlunos.getResultList();
-
+    
             // Imprimir no console os alunos
             for (Aluno aluno : alunos) {
                 System.out.println("Matrícula: " + aluno.getMatricula() + ", Nome: " + aluno.getNome() + ", CPF: " + aluno.getCpf());
             }
-
+    
             // Buscar todos os livros
             Query<Livro> queryLivros = session.createQuery("FROM Livro", Livro.class);
             List<Livro> livros = queryLivros.getResultList();
-
+    
             // Imprimir no console os livros
             for (Livro livro : livros) {
                 System.out.println("Título: " + livro.getTitulo() + ", ISBN: " + livro.getIsbn() + ", Autor: " + livro.getAutor() + ", Disponível: " + livro.isDisponivel());
             }
-
+    
+            // Buscar todos os empréstimos
+            Query<Emprestimo> queryEmprestimos = session.createQuery("FROM Emprestimo", Emprestimo.class);
+            List<Emprestimo> emprestimos = queryEmprestimos.getResultList();
+    
+            System.out.println("---- Empréstimos ----");
+            for (Emprestimo emprestimo : emprestimos) {
+                System.out.println("Data do empréstimo: " + emprestimo.getDataEmprestimo() + 
+                                   ", Data de devolução: " + emprestimo.getDataDevolucao() +
+                                   ", Multa: " + emprestimo.getMulta() + ", Atraso: " + emprestimo.isAtraso());
+                
+                // Imprimir os itens emprestados
+                System.out.println("Itens emprestados:");
+                for (ItemEmprestimo item : emprestimo.getItensEmprestados()) {
+                    System.out.println("   - Livro: " + item.getLivro().getTitulo() + 
+                                       ", ISBN: " + item.getLivro().getIsbn() + 
+                                       ", Data de devolução prevista: " + item.getDataPrevista() + 
+                                       ", Data de devolução real: " + item.getDataDevolucao());
+                }
+            }
+    
             // Confirmar a transação
             transaction.commit();
-
+    
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback(); // Reverter a transação em caso de erro
@@ -273,6 +300,7 @@ mainMenu.getChildren().add(btnRealizarEmprestimo);
             session.close(); // Fechar a sessão
         }
     }
+    
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

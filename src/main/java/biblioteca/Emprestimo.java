@@ -1,18 +1,41 @@
 package biblioteca;
-import java.util.List;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "emprestimos")
 public class Emprestimo {
-    private EmprestimoFactory emprestimoFactory;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_emprestimo", nullable = false)
     private Date dataEmprestimo;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_devolucao")
     private Date dataDevolucao;
+
+    @Column(name = "multa", nullable = false)
     private float multa;
+
+    @Column(name = "atraso", nullable = false)
     private boolean atraso;
 
-    // Construtor
+    @OneToMany(mappedBy = "emprestimo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ItemEmprestimo> itensEmprestados = new ArrayList<>();
+
+    // Construtor padrão para JPA
+    public Emprestimo() {
+    }
+
+    // Construtor personalizado
     public Emprestimo(Date dataEmprestimo, Date dataDevolucao, float multa, boolean atraso) {
-        this.emprestimoFactory = new EmprestimoFactory();
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.multa = multa;
@@ -20,6 +43,10 @@ public class Emprestimo {
     }
 
     // Getters e Setters
+    public Long getId() {
+        return id;
+    }
+
     public Date getDataEmprestimo() {
         return dataEmprestimo;
     }
@@ -52,19 +79,17 @@ public class Emprestimo {
         this.atraso = atraso;
     }
 
-    // Métodos adicionais
-    public void calcularDataDevolucao(Titulo titulo) {
-        // Implementação futura
-    }
-
-    private List<ItemEmprestimo> itensEmprestados = new ArrayList<>();
-
-    public void adicionarItem(ItemEmprestimo item) {
-    itensEmprestados.add(item);
-    }
-
     public List<ItemEmprestimo> getItensEmprestados() {
         return itensEmprestados;
     }
 
+    public void adicionarItem(ItemEmprestimo item) {
+        itensEmprestados.add(item);
+        item.setEmprestimo(this); // Vincula o item ao empréstimo
+    }
+
+    public void removerItem(ItemEmprestimo item) {
+        itensEmprestados.remove(item);
+        item.setEmprestimo(null); // Remove a vinculação
+    }
 }

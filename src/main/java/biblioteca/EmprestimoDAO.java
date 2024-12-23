@@ -52,7 +52,7 @@ public class EmprestimoDAO implements GenericDAO<Emprestimo> {
     @Override
     public List<Emprestimo> findAll() {
         Session session = HibernateUtil.getSession();
-        List<Emprestimo> emprestimos = session.createQuery("from Emprestimo", Emprestimo.class).list();
+        List<Emprestimo> emprestimos = session.createQuery("FROM Emprestimo", Emprestimo.class).list();
         session.close();
         return emprestimos;
     }
