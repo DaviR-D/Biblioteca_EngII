@@ -10,7 +10,7 @@ public class EmprestimoFactory {
     public Emprestimo criarEmprestimo(Aluno aluno, List<Livro> livros) {
         Date dataAtual = new Date();
         Date dataDevolucaoPrevista = calcularDataDevolucao(dataAtual, 15);
-        Emprestimo emprestimo = new Emprestimo(dataAtual, dataDevolucaoPrevista, 0.0f, false);
+        Emprestimo emprestimo = new Emprestimo(dataAtual, dataDevolucaoPrevista, 0.0f, false, aluno);
         
         for (Livro livro : livros) {
             ItemEmprestimo item = new ItemEmprestimo(null, dataDevolucaoPrevista, livro);

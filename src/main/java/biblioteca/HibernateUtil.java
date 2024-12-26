@@ -15,6 +15,8 @@ public class HibernateUtil {
                     .configure("hibernate.cfg.xml")  // arquivo de configuração do Hibernate
                     .addAnnotatedClass(Aluno.class)  // Adiciona a classe Aluno
                     .addAnnotatedClass(Livro.class)  // Adiciona a classe Livro
+                    .addAnnotatedClass(Emprestimo.class) // Adiciona a classe Emprestimo
+                    .addAnnotatedClass(ItemEmprestimo.class) // Adiciona a classe ItemEmprestimo
                     .buildSessionFactory();
         } catch (Exception e) {
             e.printStackTrace();

@@ -35,6 +35,8 @@ public class ItemEmprestimo {
         this.livro = livro;
     }
 
+    public ItemEmprestimo(){}
+
     // Getters e Setters
     public Date getDataDevolucao() {
         return dataDevolucao;

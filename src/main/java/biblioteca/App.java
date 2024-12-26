@@ -269,12 +269,16 @@ mainMenu.getChildren().add(btnRealizarEmprestimo);
             }
     
             // Buscar todos os empréstimos
-            Query<Emprestimo> queryEmprestimos = session.createQuery("FROM Emprestimo", Emprestimo.class);
-            List<Emprestimo> emprestimos = queryEmprestimos.getResultList();
+            //Query<Emprestimo> queryEmprestimos = session.createQuery("FROM Emprestimo", Emprestimo.class);
+            //List<Emprestimo> emprestimos = queryEmprestimos.getResultList();
+
+            EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+            List<Emprestimo> emprestimos = emprestimoDAO.findAll();
     
             System.out.println("---- Empréstimos ----");
             for (Emprestimo emprestimo : emprestimos) {
-                System.out.println("Data do empréstimo: " + emprestimo.getDataEmprestimo() + 
+                System.out.println("Aluno: " + emprestimo.getAluno().getMatricula() +
+                                   "Data do empréstimo: " + emprestimo.getDataEmprestimo() + 
                                    ", Data de devolução: " + emprestimo.getDataDevolucao() +
                                    ", Multa: " + emprestimo.getMulta() + ", Atraso: " + emprestimo.isAtraso());
                 

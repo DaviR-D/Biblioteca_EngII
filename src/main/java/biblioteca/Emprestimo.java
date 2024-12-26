@@ -27,6 +27,10 @@ public class Emprestimo {
     @Column(name = "atraso", nullable = false)
     private boolean atraso;
 
+    @ManyToOne
+    @JoinColumn(name = "aluno_id", nullable = false)
+    private Aluno aluno;
+
     @OneToMany(mappedBy = "emprestimo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemEmprestimo> itensEmprestados = new ArrayList<>();
 
@@ -35,11 +39,12 @@ public class Emprestimo {
     }
 
     // Construtor personalizado
-    public Emprestimo(Date dataEmprestimo, Date dataDevolucao, float multa, boolean atraso) {
+    public Emprestimo(Date dataEmprestimo, Date dataDevolucao, float multa, boolean atraso, Aluno aluno) {
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.multa = multa;
         this.atraso = atraso;
+        this.aluno = aluno;
     }
 
     // Getters e Setters
@@ -77,6 +82,14 @@ public class Emprestimo {
 
     public void setAtraso(boolean atraso) {
         this.atraso = atraso;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+    
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
     public List<ItemEmprestimo> getItensEmprestados() {
