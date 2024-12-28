@@ -11,7 +11,7 @@ public class Emprestimo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_emprestimo", nullable = false)
@@ -48,7 +48,7 @@ public class Emprestimo {
     }
 
     // Getters e Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -104,5 +104,12 @@ public class Emprestimo {
     public void removerItem(ItemEmprestimo item) {
         itensEmprestados.remove(item);
         item.setEmprestimo(null); // Remove a vinculação
+    }
+
+    public Date getDataPrevistaDevolucao() {
+        if (!itensEmprestados.isEmpty()) {
+            return itensEmprestados.get(0).getDataPrevista(); 
+        }
+        return null;
     }
 }

@@ -12,6 +12,10 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import java.util.List;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
+
 
 public class App extends Application {
 
@@ -236,6 +240,71 @@ Button btnRealizarEmprestimo = new Button("Realizar Empréstimo");
 btnRealizarEmprestimo.setOnAction(e -> emprestimoStage.show());
 mainMenu.getChildren().add(btnRealizarEmprestimo);
 
+// Configuração da janela de devolução
+Stage devolucaoStage = new Stage();
+devolucaoStage.setTitle("Realizar Devolução");
+
+GridPane devolucaoGrid = new GridPane();
+devolucaoGrid.setPadding(new Insets(10));
+devolucaoGrid.setHgap(10);
+devolucaoGrid.setVgap(10);
+
+Label emprestimoIdLabel = new Label("ID do Empréstimo:");
+TextField emprestimoIdField = new TextField();
+//Label dataDevolucaoLabel = new Label("Data de Devolução (dd/MM/yyyy):");
+//TextField dataDevolucaoField = new TextField();
+Button realizarDevolucaoBtn = new Button("Realizar Devolução");
+
+devolucaoGrid.add(emprestimoIdLabel, 0, 0);
+devolucaoGrid.add(emprestimoIdField, 1, 0);
+//devolucaoGrid.add(dataDevolucaoLabel, 0, 1);
+//devolucaoGrid.add(dataDevolucaoField, 1, 1);
+devolucaoGrid.add(realizarDevolucaoBtn, 1, 2);
+
+realizarDevolucaoBtn.setOnAction(e -> {
+    String emprestimoIdTexto = emprestimoIdField.getText();
+    //String dataDevolucaoTexto = dataDevolucaoField.getText();
+
+    if (emprestimoIdTexto.isEmpty() ) {
+        showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos!");
+        return;
+    }
+
+    try {
+        int emprestimoId = Integer.parseInt(emprestimoIdTexto);
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        //Date dataDevolucao = sdf.parse(dataDevolucaoTexto);
+        Date dataDevolucao = new Date();
+
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+        DevolucaoController devolucaoController = new DevolucaoController(emprestimoDAO);
+
+        devolucaoController.registrarDevolucao(emprestimoId, dataDevolucao);
+
+        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Devolução realizada com sucesso!");
+
+        emprestimoIdField.clear();
+        //dataDevolucaoField.clear();
+    } catch (NumberFormatException ex) {
+        showAlert(Alert.AlertType.ERROR, "Erro", "ID do Empréstimo deve ser um número inteiro!");
+    }
+   //  catch (ParseException ex) {
+     //   showAlert(Alert.AlertType.ERROR, "Erro", "Data de devolução inválida! Use o formato dd/MM/yyyy.");
+    //} 
+    catch (Exception ex) {
+        showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao realizar devolução: " + ex.getMessage());
+    }
+});
+
+Scene devolucaoScene = new Scene(devolucaoGrid, 400, 200);
+devolucaoStage.setScene(devolucaoScene);
+
+// Adicionar botão de devolução no menu principal
+Button btnRealizarDevolucao = new Button("Realizar Devolução");
+btnRealizarDevolucao.setOnAction(e -> devolucaoStage.show());
+mainMenu.getChildren().add(btnRealizarDevolucao);
+
+
 
         //HibernateUtil.limparBanco();
         // Imprimir dados de alunos e livros
@@ -277,8 +346,9 @@ mainMenu.getChildren().add(btnRealizarEmprestimo);
     
             System.out.println("---- Empréstimos ----");
             for (Emprestimo emprestimo : emprestimos) {
-                System.out.println("Aluno: " + emprestimo.getAluno().getMatricula() +
-                                   "Data do empréstimo: " + emprestimo.getDataEmprestimo() + 
+                System.out.println("Id: " + emprestimo.getId() +
+                                   ", Aluno: " + emprestimo.getAluno().getMatricula() +
+                                   ", Data do empréstimo: " + emprestimo.getDataEmprestimo() + 
                                    ", Data de devolução: " + emprestimo.getDataDevolucao() +
                                    ", Multa: " + emprestimo.getMulta() + ", Atraso: " + emprestimo.isAtraso());
                 

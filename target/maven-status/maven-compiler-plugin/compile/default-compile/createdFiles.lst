@@ -22,6 +22,7 @@ biblioteca/App.class
 biblioteca/Devolucao.class
 biblioteca/ReservaDAO.class
 biblioteca/AlunoFactory.class
+biblioteca/DevolucaoController.class
 biblioteca/Autor.class
 biblioteca/EmprestimoSubject.class
 biblioteca/ImpressoraService.class

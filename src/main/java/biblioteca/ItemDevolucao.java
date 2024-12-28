@@ -33,8 +33,9 @@ public class ItemDevolucao {
         this.valor = valor;
     }
 
-    public int getDiasAtraso() {
-        return diasAtraso;
+    public int getDiasAtraso(Date dataPrevista) {
+        long diferenca = dataDevolucao.getTime() - dataPrevista.getTime();
+        return (int) (diferenca / (1000 * 60 * 60 * 24));
     }
 
     public void setDiasAtraso(int diasAtraso) {

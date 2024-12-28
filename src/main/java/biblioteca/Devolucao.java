@@ -50,13 +50,18 @@ public class Devolucao {
     }
 
     // Métodos adicionais
-    public float calcularMulta() {
-        // Implementação futura
+    public float calcularMulta(Date dataPrevista, float valorPorDia) {
+        if (dataDevolucao.after(dataPrevista)) {
+            long diferencaMillis = dataDevolucao.getTime() - dataPrevista.getTime();
+            long diasAtraso = diferencaMillis / (1000 * 60 * 60 * 24);
+            multa = diasAtraso * valorPorDia;
+            return multa;
+        }
         return 0;
     }
 
     public boolean verificarAtraso(Date dataPrevista) {
-        // Implementação futura
-        return false;
+        atraso = dataDevolucao.after(dataPrevista);
+        return atraso;
     }
 }
