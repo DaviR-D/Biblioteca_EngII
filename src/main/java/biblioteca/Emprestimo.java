@@ -31,8 +31,8 @@ public class Emprestimo {
     @JoinColumn(name = "aluno_id", nullable = false)
     private Aluno aluno;
 
-    @OneToMany(mappedBy = "emprestimo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<ItemEmprestimo> itensEmprestados = new ArrayList<>();
+    @OneToMany(mappedBy = "emprestimo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<ItemEmprestimo> itensEmprestados = new ArrayList<>();    
 
     // Construtor padrão para JPA
     public Emprestimo() {
