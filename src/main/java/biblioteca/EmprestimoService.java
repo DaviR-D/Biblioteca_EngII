@@ -12,18 +12,16 @@ public class EmprestimoService {
     private AlunoDAO alunoDAO;
     private LivroDAO livroDAO;
     private ReservaDAO reservaDAO;
-    private DevolucaoDAO devolucaoDAO;
     private ImpressoraService impressoraService;
     private EmprestimoFactory emprestimoFactory;
 
     // Construtor
     public EmprestimoService(EmprestimoDAO emprestimoDAO, AlunoDAO alunoDAO, LivroDAO livroDAO,
-                             ReservaDAO reservaDAO, DevolucaoDAO devolucaoDAO, ImpressoraService impressoraService) {
+                             ReservaDAO reservaDAO, ImpressoraService impressoraService) {
         this.emprestimoDAO = emprestimoDAO;
         this.alunoDAO = alunoDAO;
         this.livroDAO = livroDAO;
         this.reservaDAO = reservaDAO;
-        this.devolucaoDAO = devolucaoDAO;
         this.impressoraService = impressoraService;
     }
 

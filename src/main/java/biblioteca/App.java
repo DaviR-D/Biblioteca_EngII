@@ -193,7 +193,7 @@ realizarEmprestimoBtn.setOnAction(e -> {
         isbnList.add(isbn.trim());
         }
 
-        EmprestimoService emprestimoService = new EmprestimoService(new EmprestimoDAO(), new AlunoDAO(), new LivroDAO(), new ReservaDAO(), new DevolucaoDAO(), new ImpressoraService());
+        EmprestimoService emprestimoService = new EmprestimoService(new EmprestimoDAO(), new AlunoDAO(), new LivroDAO(), new ReservaDAO(), new ImpressoraService());
 
         AlunoDAO alunoDAO = new AlunoDAO();
         LivroDAO livroDAO = new LivroDAO();
